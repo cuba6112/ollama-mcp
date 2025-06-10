@@ -1,6 +1,10 @@
 # Ollama MCP Server
 
-An enhanced MCP server for interacting with the Ollama API, providing a robust bridge between Claude Desktop and locally-running LLMs via Ollama.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![MCP](https://img.shields.io/badge/MCP-1.4+-green.svg)](https://modelcontextprotocol.io/)
+
+An enhanced MCP (Model Context Protocol) server for interacting with the Ollama API, providing a robust bridge between Claude Desktop and locally-running LLMs via Ollama.
 
 ## Features
 
@@ -14,6 +18,37 @@ An enhanced MCP server for interacting with the Ollama API, providing a robust b
 - 🔍 **Type Safety**: Full Pydantic validation for requests/responses
 - 📊 **Advanced Options**: Support for temperature, top_p, seed, and more
 - 🌊 **Streaming Support**: Real-time token streaming for long responses
+
+## Quick Start
+
+1. **Install Ollama** and ensure it's running:
+   ```bash
+   # Download from https://ollama.com or use:
+   curl -fsSL https://ollama.com/install.sh | sh
+   ollama serve
+   ```
+
+2. **Install the MCP server**:
+   ```bash
+   git clone https://github.com/your-username/ollama-mcp-server.git
+   cd ollama-mcp-server
+   pip install -r requirements.txt
+   ```
+
+3. **Configure Claude Desktop** by adding to your config file:
+   ```json
+   {
+     "mcpServers": {
+       "ollama": {
+         "command": "/path/to/your/python",
+         "args": ["-m", "ollama_mcp_server.main"],
+         "cwd": "/path/to/ollama-mcp-server"
+       }
+     }
+   }
+   ```
+
+4. **Restart Claude Desktop** and start using Ollama models!
 
 ## Prerequisites
 
@@ -163,3 +198,24 @@ python test_tools.py
 ```
 
 This will verify that all core functions work correctly with your Ollama installation.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Anthropic](https://www.anthropic.com/) for the Model Context Protocol specification
+- [Ollama](https://ollama.com/) for the excellent local LLM platform
+- The MCP community for tools and documentation
+
+## Support
+
+If you encounter any issues or have questions:
+- Check the [troubleshooting section](#troubleshooting) above
+- Look through existing [GitHub issues](https://github.com/your-username/ollama-mcp-server/issues)
+- Create a new issue with detailed information about your problem

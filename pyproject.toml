@@ -1,8 +1,25 @@
 [tool.poetry]
 name = "ollama-mcp-server"
-version = "0.1.0"
-description = "An MCP server for interacting with Ollama's API."
-authors = ["Cascade"] 
+version = "0.2.0"
+description = "An enhanced MCP server for interacting with Ollama's API, providing a robust bridge between Claude Desktop and locally-running LLMs."
+authors = ["Claude Code"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/your-username/ollama-mcp-server"
+repository = "https://github.com/your-username/ollama-mcp-server"
+keywords = ["mcp", "ollama", "llm", "ai", "claude"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+] 
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"

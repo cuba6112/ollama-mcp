@@ -15,6 +15,7 @@ An enhanced MCP (Model Context Protocol) server for interacting with the Ollama 
 - ⚡ **Response Caching**: Intelligent caching for improved performance
 - 🛡️ **Error Handling**: Graceful error handling with helpful messages
 - ⚙️ **Flexible Configuration**: Environment variables and .env file support
+- 🌐 **Smart Host Detection**: Automatically detects localhost vs external network access
 - 🔍 **Type Safety**: Full Pydantic validation for requests/responses
 - 📊 **Advanced Options**: Support for temperature, top_p, seed, and more
 - 🌊 **Streaming Support**: Real-time token streaming for long responses
@@ -54,6 +55,59 @@ An enhanced MCP (Model Context Protocol) server for interacting with the Ollama 
     ```
 
 4.  **Restart Claude Desktop** and start using Ollama models!
+
+</details>
+
+## Smithery Integration
+
+<details>
+<summary><strong>Using with Smithery</strong></summary>
+
+[Smithery](https://smithery.ai/) provides a convenient way to install and manage MCP servers. The Ollama MCP server includes automatic network detection to work seamlessly with external tools like Smithery.
+
+### Installation via Smithery
+
+```bash
+npx -y @smithery/cli@latest install @cuba6112/ollama-mcp --client windsurf --key YOUR_KEY
+```
+
+### Network Configuration
+
+The server automatically detects the appropriate Ollama host:
+
+1. **Local Development**: Uses `http://localhost:11434` when Ollama is accessible locally
+2. **External Access**: Automatically detects your local network IP (e.g., `http://192.168.1.100:11434`) when localhost is not accessible
+3. **Manual Override**: Set `OLLAMA_HOST` environment variable for custom configurations
+
+### Ensuring Ollama External Access
+
+For Smithery and other external tools to connect to your local Ollama instance:
+
+1. **Start Ollama with external binding**:
+   ```bash
+   ollama serve --host 0.0.0.0
+   ```
+
+2. **Or set environment variable**:
+   ```bash
+   export OLLAMA_HOST=0.0.0.0
+   ollama serve
+   ```
+
+3. **Verify connectivity**:
+   ```bash
+   # Test from another machine or tool
+   curl http://YOUR_LOCAL_IP:11434/api/tags
+   ```
+
+### Troubleshooting Smithery Connection
+
+If Smithery cannot connect to your Ollama instance:
+
+1. **Check Ollama is accepting external connections**: `ollama serve --host 0.0.0.0`
+2. **Verify firewall settings**: Ensure port 11434 is not blocked
+3. **Test network connectivity**: Try accessing `http://YOUR_LOCAL_IP:11434` from another device
+4. **Check server logs**: Set `OLLAMA_LOG_LEVEL=DEBUG` for detailed connection information
 
 </details>
 
@@ -217,14 +271,29 @@ Replace `/path/to/your/venv/bin/python` with the actual path to your Python exec
 
 The server can be configured using environment variables or a `.env` file:
 
+### Connection Settings
 ```bash
-# Connection settings
-OLLAMA_HOST=http://localhost:11434      # Ollama API URL
+# Ollama host - automatically detected by default
+OLLAMA_HOST=http://localhost:11434      # Manual override for Ollama API URL
 OLLAMA_REQUEST_TIMEOUT=30.0             # Request timeout in seconds
 OLLAMA_CONNECTION_TIMEOUT=5.0           # Connection timeout in seconds
 OLLAMA_MAX_RETRIES=3                    # Max retry attempts
 OLLAMA_RETRY_DELAY=1.0                  # Initial retry delay
+```
 
+### Host Auto-Detection
+
+The server automatically detects the appropriate Ollama host:
+
+1. **Environment Variable**: If `OLLAMA_HOST` is set, uses that value
+2. **Localhost Test**: Tries to connect to `http://localhost:11434`
+3. **Network Detection**: If localhost fails, automatically detects local network IP
+4. **Fallback**: Uses localhost as final fallback
+
+This ensures seamless operation in both local development and external access scenarios (like Smithery).
+
+### Other Settings
+```bash
 # Logging
 OLLAMA_LOG_LEVEL=INFO                   # Log level (DEBUG, INFO, WARNING, ERROR)
 OLLAMA_LOG_REQUESTS=false               # Log all API requests/responses

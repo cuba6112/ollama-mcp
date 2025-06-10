@@ -1,8 +1,42 @@
 """Configuration management for Ollama MCP Server"""
 import os
+import socket
 from typing import Optional
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings
+
+
+def get_default_ollama_host() -> str:
+    """
+    Get default Ollama host based on environment.
+    Uses localhost for local development, but tries to detect host IP for external access.
+    """
+    # If explicitly set via environment, use that
+    if "OLLAMA_HOST" in os.environ:
+        return os.environ["OLLAMA_HOST"]
+    
+    # Check if we can connect to localhost:11434 first (standard Ollama setup)
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(1)
+        result = sock.connect_ex(('127.0.0.1', 11434))
+        sock.close()
+        if result == 0:
+            return "http://localhost:11434"
+    except:
+        pass
+    
+    # If localhost doesn't work, try to find the local IP
+    try:
+        # Connect to a remote address to determine local IP
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock.connect(("8.8.8.8", 80))
+        local_ip = sock.getsockname()[0]
+        sock.close()
+        return f"http://{local_ip}:11434"
+    except:
+        # Fallback to localhost if all else fails
+        return "http://localhost:11434"
 
 
 class Settings(BaseSettings):
@@ -10,7 +44,7 @@ class Settings(BaseSettings):
     
     # Ollama connection settings
     ollama_host: str = Field(
-        default="http://localhost:11434",
+        default_factory=get_default_ollama_host,
         env="OLLAMA_HOST",
         description="Ollama API base URL"
     )

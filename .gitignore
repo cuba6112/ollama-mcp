@@ -1,0 +1,15 @@
+# Virtual Environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Logs
+server.log
+
+# IDE and config files
+.claude/
+claude_config_backup.json
+.idea/
+.vscode/

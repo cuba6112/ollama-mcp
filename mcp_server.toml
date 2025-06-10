@@ -1,0 +1,58 @@
+[info]
+name = "ollama_mcp_server"
+version = "0.1.0"
+description = "An MCP server for interacting with Ollama's API."
+
+[[tool]]
+name = "list_models"
+description = "List all available Ollama models."
+
+[[tool]]
+name = "generate_completion"
+description = "Generate a completion from a model."
+
+[tool.args.model]
+type = "string"
+description = "The name of the model to use."
+required = true
+
+[tool.args.prompt]
+type = "string"
+description = "The prompt to generate a response for."
+required = true
+
+
+
+[[tool]]
+name = "generate_chat_completion"
+description = "Generate a chat completion from a model."
+
+[tool.args.model]
+type = "string"
+description = "The name of the model to use."
+required = true
+
+[tool.args.messages]
+type = "array"
+description = "The messages of the chat, this can be used to keep a chat memory."
+required = true
+
+
+
+[[tool]]
+name = "pull_model"
+description = "Pull a model from the Ollama library."
+
+[tool.args.name]
+type = "string"
+description = "The name of the model to pull."
+required = true
+
+[[tool]]
+name = "delete_model"
+description = "Delete a model from the local storage."
+
+[tool.args.name]
+type = "string"
+description = "The name of the model to delete."
+required = true

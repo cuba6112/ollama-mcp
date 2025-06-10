@@ -76,7 +76,7 @@ npx -y @smithery/cli@latest install @cuba6112/ollama-mcp --client windsurf --key
 The server automatically detects the appropriate Ollama host:
 
 1. **Local Development**: Uses `http://localhost:11434` when Ollama is accessible locally
-2. **External Access**: Automatically detects your local network IP (e.g., `http://192.168.1.100:11434`) when localhost is not accessible
+2. **External Access**: Automatically detects your local network IP (e.g., `http://YOUR_LOCAL_IP:11434`) when localhost is not accessible
 3. **Manual Override**: Set `OLLAMA_HOST` environment variable for custom configurations
 
 ### Ensuring Ollama External Access

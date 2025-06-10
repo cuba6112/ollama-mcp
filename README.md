@@ -21,34 +21,108 @@ An enhanced MCP (Model Context Protocol) server for interacting with the Ollama 
 
 ## Quick Start
 
-1. **Install Ollama** and ensure it's running:
-   ```bash
-   # Download from https://ollama.com or use:
-   curl -fsSL https://ollama.com/install.sh | sh
-   ollama serve
-   ```
+<details>
+<summary><strong>macOS Instructions</strong></summary>
 
-2. **Install the MCP server**:
-   ```bash
-   git clone https://github.com/your-username/ollama-mcp-server.git
-   cd ollama-mcp-server
-   pip install -r requirements.txt
-   ```
+1.  **Install Ollama** and ensure it's running:
+    ```bash
+    # Download from https://ollama.com or use:
+    curl -fsSL https://ollama.com/install.sh | sh
+    ollama serve
+    ```
 
-3. **Configure Claude Desktop** by adding to your config file:
-   ```json
-   {
-     "mcpServers": {
-       "ollama": {
-         "command": "/path/to/your/python",
-         "args": ["-m", "ollama_mcp_server.main"],
-         "cwd": "/path/to/ollama-mcp-server"
-       }
-     }
-   }
-   ```
+2.  **Install the MCP server**:
+    ```bash
+    git clone https://github.com/cuba6112/ollama-mcp.git
+    cd ollama-mcp
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+    ```
 
-4. **Restart Claude Desktop** and start using Ollama models!
+3.  **Configure Claude Desktop** by adding to your config file:
+    ```json
+    {
+      "mcpServers": {
+        "ollama": {
+          "command": "/Users/mac_orion/mcp_server/ollama_mcp_server/venv/bin/python",
+          "args": ["-m", "ollama_mcp_server.main"],
+          "cwd": "/Users/mac_orion/mcp_server/ollama_mcp_server"
+        }
+      }
+    }
+    ```
+
+4.  **Restart Claude Desktop** and start using Ollama models!
+
+</details>
+
+<details>
+<summary><strong>Linux Instructions</strong></summary>
+
+1.  **Install Ollama** and ensure it's running:
+    ```bash
+    # Download from https://ollama.com or use:
+    curl -fsSL https://ollama.com/install.sh | sh
+    ollama serve
+    ```
+
+2.  **Install the MCP server**:
+    ```bash
+    git clone https://github.com/cuba6112/ollama-mcp.git
+    cd ollama-mcp
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+    ```
+
+3.  **Configure Claude Desktop** by adding to your config file:
+    ```json
+    {
+      "mcpServers": {
+        "ollama": {
+          "command": "/path/to/your/venv/bin/python",
+          "args": ["-m", "ollama_mcp_server.main"],
+          "cwd": "/path/to/ollama-mcp"
+        }
+      }
+    }
+    ```
+
+4.  **Restart Claude Desktop** and start using Ollama models!
+
+</details>
+
+<details>
+<summary><strong>Windows Instructions</strong></summary>
+
+1.  **Install Ollama**: Download and install from the [official Ollama website](https://ollama.com).
+
+2.  **Install the MCP server**:
+    ```bash
+    git clone https://github.com/cuba6112/ollama-mcp.git
+    cd ollama-mcp
+    python -m venv venv
+    .\venv\Scripts\activate
+    pip install -r requirements.txt
+    ```
+
+3.  **Configure Claude Desktop** by adding to your config file:
+    ```json
+    {
+      "mcpServers": {
+        "ollama": {
+          "command": "C:\\path\\to\\your\\venv\\Scripts\\python.exe",
+          "args": ["-m", "ollama_mcp_server.main"],
+          "cwd": "C:\\path\\to\\ollama-mcp"
+        }
+      }
+    }
+    ```
+
+4.  **Restart Claude Desktop** and start using Ollama models!
+
+</details>
 
 ## Prerequisites
 

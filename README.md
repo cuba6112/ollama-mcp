@@ -335,9 +335,19 @@ For better performance:
 
 ## Testing
 
-Test the server directly:
+Test the server directly using the MCP dev tool:
 ```bash
-python test_tools.py
+mcp dev ollama_mcp_server/main.py
+```
+
+Or run the server and test individual tools:
+```bash
+# Start the server
+python -m ollama_mcp_server.main
+
+# In another terminal, test with Claude Desktop or other MCP clients
+# You can also check the example usage:
+python examples/usage_example.py
 ```
 
 This will verify that all core functions work correctly with your Ollama installation.
